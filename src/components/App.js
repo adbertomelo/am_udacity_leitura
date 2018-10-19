@@ -4,17 +4,18 @@ import * as API from '../utils/api'
 import { loadCategories } from '../actions'
 
 import Header from './Header'
-
+import ListPosts from './ListPosts'
 
 class App extends Component {
 
   state = {
-    categories: []
+    categories: [],
+    posts: []
   }
 
   constructor(props){
     super(props)
-    this.state = { categories: []}
+    this.state = { categories: [], posts: []}
   }
 
   componentDidMount(){
@@ -35,16 +36,30 @@ class App extends Component {
       console.log(error);
     })
 
+    this.loadPosts("")
+
+  }
+
+  loadPosts = (categorie) => {
+
+    API.fetchPostsByCategorie(categorie).then((results) => {
+      
+      this.setState({ posts: results})
+
+    }).catch(error => {
+      console.log(error);
+    })
 
   }
 
   render() {
     
-    const { categories } = this.state
+    const { categories, posts } = this.state
 
     return (
       <div>
-        <Header categories={categories}/>
+        <Header categories={categories} onSelect={this.loadPosts}/>
+        <ListPosts posts={posts}/>
       </div>
     );
   }

@@ -8,8 +8,15 @@ export function fetchCategories () {
 }
 
 
-export function fetchPosts () {
+export function fetchPostsByCategorie (categorie) {
   
-  return fetch('http://localhost:3001/posts', { headers: { 'Authorization': AUTHORIZATION  }})
+  let parteUrl = ""
+
+  if (categorie === "all" || categorie === "")
+    parteUrl = 'posts'
+  else
+    parteUrl = `${categorie}/posts`
+
+  return fetch('http://localhost:3001/' + parteUrl, { headers: { 'Authorization': AUTHORIZATION  }})
     .then((res) => res.json())
 }

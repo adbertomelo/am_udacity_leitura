@@ -6,6 +6,7 @@ export default function Header ({ categories, onSelect }) {
   return (
   
     <div>
+      <span>Categorie:</span>
       <select onChange={(event) => onSelect(event.target.value)}>
         <option value="all">All</option>
         {
