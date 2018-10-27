@@ -1,22 +1,37 @@
 
 const AUTHORIZATION = "whatever-you-want"
 
+const HOST = "http://localhost:3001"
+
 export function fetchCategories () {
   
-  return fetch('http://localhost:3001/categories', { headers: { 'Authorization': AUTHORIZATION  }})
+  return fetch(HOST + '/categories', { headers: { 'Authorization': AUTHORIZATION  }})
     .then((res) => res.json())
 }
 
 
-export function fetchPostsByCategorie (categorie) {
+export function fetchAllPosts() {
+  
+
+  return fetch(HOST + '/posts', { headers: { 'Authorization': AUTHORIZATION  }})
+    .then((res) => res.json())
+}
+
+export function fetchPostsByCategory (category) {
   
   let parteUrl = ""
 
-  if (categorie === "all" || categorie === "")
-    parteUrl = 'posts'
+  if (category === "all" || category === "")
+    parteUrl = '/posts'
   else
-    parteUrl = `${categorie}/posts`
+    parteUrl = `/${category}/posts`
 
-  return fetch('http://localhost:3001/' + parteUrl, { headers: { 'Authorization': AUTHORIZATION  }})
+  return fetch(HOST + parteUrl, { headers: { 'Authorization': AUTHORIZATION  }})
+    .then((res) => res.json())
+}
+
+export function fetchPostById(postId) {
+
+  return fetch(HOST + '/posts/' + postId, { headers: { 'Authorization': AUTHORIZATION  }})
     .then((res) => res.json())
 }

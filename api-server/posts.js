@@ -24,7 +24,19 @@ const defaultData = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33lneu": {
+    id: '6ni6ok3ym7mf1p33lneu',
+    timestamp: 1468479767190,
+    title: 'Learn Redux in 10 minutes! 2',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology. 2',
+    author: 'thingone 2',
+    category: 'redux',
+    voteScore: 4,
+    deleted: false,
+    commentCount: 0
   }
+  
 }
 
 function getData (token) {

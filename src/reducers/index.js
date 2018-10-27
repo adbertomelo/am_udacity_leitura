@@ -1,27 +1,29 @@
 
-import { LOAD_CATEGORIES } from '../actions'
+import { LOAD_POSTS, FILTER_POSTS, ORDER_BY } from '../actions'
 
-
-const initialCategoriesState = {
-  categories: []
+const initialState = {
+  posts: [],
+  selectedCategory: "all",
+  order: "VoteScore"
 }
 
-function categories(state = initialCategoriesState, action){
+function posts(state = initialState, action){
   
+  const { posts, category, order } = action
+
   switch(action.type)
   {
-    case LOAD_CATEGORIES:
+    case LOAD_POSTS:
+      return { ...state, posts: posts }
+    case FILTER_POSTS:
+      return { ...state, selectedCategory: category }
+    case ORDER_BY:
+      return {...state, order: order}
 
-      return {
-        ...state,
-        categories: action.categories
-      }
     default:
       return state
   }
 
-  
-
 }
 
-export default categories
+export default posts

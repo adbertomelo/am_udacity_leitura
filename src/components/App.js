@@ -1,50 +1,32 @@
 import React, { Component } from 'react'
 //import { connect } from 'react-redux'
+import { BrowserRouter, Route } from 'react-router-dom'
 import * as API from '../utils/api'
-import { loadCategories } from '../actions'
+import {Container, Modal, Button, Image} from 'semantic-ui-react'
 
 import Header from './Header'
 import ListPosts from './ListPosts'
+import PostsDetail from './PostDetail';
+import NewPost from './NewPost';
+import EditPost from './EditPost';
+
 
 class App extends Component {
 
   state = {
-    categories: [],
-    posts: []
+    categories: []
   }
 
   constructor(props){
     super(props)
-    this.state = { categories: [], posts: []}
+    this.state = { categories: []}
   }
 
   componentDidMount(){
 
-    const { store } = this.props
-
-    store.subscribe(() => {
-        this.setState(() => ({ categories: store.getState().categories })
-        )
-      }
-    )
-
-    API.fetchCategories().then((results) => {
+   API.fetchCategories().then((results) => {
       
-      store.dispatch( loadCategories({categories: results.categories}) )
-
-    }).catch(error => {
-      console.log(error);
-    })
-
-    this.loadPosts("")
-
-  }
-
-  loadPosts = (categorie) => {
-
-    API.fetchPostsByCategorie(categorie).then((results) => {
-      
-      this.setState({ posts: results})
+      this.setState({categories: results.categories})
 
     }).catch(error => {
       console.log(error);
@@ -54,13 +36,51 @@ class App extends Component {
 
   render() {
     
-    const { categories, posts } = this.state
+    const { categories } = this.state
 
     return (
-      <div>
-        <Header categories={categories} onSelect={this.loadPosts}/>
-        <ListPosts posts={posts}/>
-      </div>
+      <BrowserRouter>
+        <div>
+
+          <Header categories={categories}/>
+          
+          <Container style={{marginTop: '7em'}}>
+
+            <Route path="/"  exact render={() => (
+              <div>
+                <ListPosts category=""/>
+              </div>
+            )}/>
+
+            <Route path="/:category" exact render={({ match }) => (
+              <div>                
+                <ListPosts category={ match.params.category }/>                
+              </div>
+            )}/>
+
+            <Route path="/post/:id" exact render={({ match }) => (
+              <div>                
+                <PostsDetail id={ match.params.id }/>                
+              </div>
+            )}/>
+
+            <Route path="/newpost" exact render={({ match }) => (
+              <div>                
+                <NewPost/>                
+              </div>
+            )}/>
+
+            <Route path="/editpost/:id" exact render={({ match }) => (
+              <div>                
+                <EditPost/>                
+              </div>
+            )}/>
+
+          </Container>          
+
+
+        </div>      
+      </BrowserRouter>
     );
   }
 }
