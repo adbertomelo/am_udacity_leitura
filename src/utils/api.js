@@ -35,3 +35,9 @@ export function fetchPostById(postId) {
   return fetch(HOST + '/posts/' + postId, { headers: { 'Authorization': AUTHORIZATION  }})
     .then((res) => res.json())
 }
+
+export function fetchComments(postId) {
+
+  return fetch(HOST + '/posts/' + postId + "/comments", { headers: { 'Authorization': AUTHORIZATION  }})
+    .then((res) => res.json())
+}
