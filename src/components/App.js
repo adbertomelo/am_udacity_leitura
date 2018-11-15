@@ -6,7 +6,7 @@ import {Container, Modal, Button, Image} from 'semantic-ui-react'
 
 import Header from './Header'
 import ListPosts from './ListPosts'
-import PostsDetail from './PostDetail';
+import PostDetail from './PostDetail';
 import NewPost from './NewPost';
 import EditPost from './EditPost';
 
@@ -60,7 +60,7 @@ class App extends Component {
 
             <Route path="/post/:id" exact render={({ match }) => (
               <div>                
-                <PostsDetail id={ match.params.id }/>                
+                <PostDetail id={ match.params.id }/>                
               </div>
             )}/>
 
@@ -72,7 +72,7 @@ class App extends Component {
 
             <Route path="/editpost/:id" exact render={({ match }) => (
               <div>                
-                <EditPost/>                
+                <EditPost id={ match.params.id }/>                
               </div>
             )}/>
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { fetchPostById, fetchComments } from '../utils/api'
 import { CommentMetadata } from 'semantic-ui-react';
 
-class PostsDetail extends Component{
+class PostDetail extends Component{
 
   state = {
     post:{},
@@ -66,4 +66,4 @@ class PostsDetail extends Component{
 
 }
 
-export default PostsDetail
+export default PostDetail
