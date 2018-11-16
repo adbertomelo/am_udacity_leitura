@@ -12,8 +12,6 @@ class ListPosts extends Component{
     
     let res = data
     
-    console.log({order: order})
-
     if (order === VOTE_SCORE)
     {
 
@@ -69,8 +67,7 @@ class ListPosts extends Component{
 
     return (
       <div>
-
-          
+         
           {
 
             sortedPosts.map((item) => (
@@ -86,6 +83,11 @@ class ListPosts extends Component{
               <div>
                 {item.timestamp}
               </div>
+              <div>
+                <a href="#">Gostei</a>|
+                <a href="#">Não Gostei</a>
+              </div>
+
             </div>
             
           ))}

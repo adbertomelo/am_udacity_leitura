@@ -46,20 +46,30 @@ class PostDetail extends Component{
         <p>{post.body}</p>
         <p>{post.category}</p>        
         <b>COMMENTS</b>
+        <div>
+          <input type="text"></input>
+        </div>
+        
         {
           comments.length > 0 && (
-          comments.map((comment) => (
-            <p key={comment.id}>
-              {comment.body}
-            </p>
-
-          ))
+            comments.map((comment) => (
+              <div>
+                <p key={comment.id}>
+                  {comment.body}
+                </p>
+                <a href="#">Edit</a>|
+                <a href="#">Del</a>|
+                <a href="#">Gostei</a>|
+                <a href="#">Não Gostei</a>
+              </div>
+            ))
             
           
         )
         }
 
-        <Link to={{pathname:"/editpost/" + post.id}}>Edit</Link>
+        <Link to={{pathname:"/editpost/" + post.id}}>Edit Post</Link>|
+        <Link to={{pathname:"/remove/" + post.id}}>Remove Post</Link>
       </div>)
     
   }

@@ -5,7 +5,7 @@ import { newPost, fetchCategories } from '../utils/api'
 class NewPost extends Component{
   constructor(props) {
     super(props)
-    this.state = {post:{ title:'', author:'', body:'', category:''}, categories: []}
+    this.state = {post:{ title:'', author:'', body:'', category:'react'}, categories: []}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -23,9 +23,13 @@ class NewPost extends Component{
   }  
 
   handleSubmit = (event) => {
+    
     event.preventDefault()
+    
     const post = this.state.post
 
+    console.log(post)
+    
       newPost(post).then((result) => {
 
       console.log(result)
@@ -35,7 +39,7 @@ class NewPost extends Component{
       console.log(error);
 
     })
-
+  
 
   }
 
@@ -73,7 +77,7 @@ class NewPost extends Component{
 
             <select onChange={this.handleInputChange}>
                 {
-                    this.state.categories.map((c) => (
+                   this.state.categories.map((c) => (
 
                       <option key={c.name} value={c.name}>{c.name}</option>
 
