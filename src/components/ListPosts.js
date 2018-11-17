@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadPosts, OrderBy } from '../actions'
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
+import ViewPost from './ViewPosts';
 
 class ListPosts extends Component{
 
@@ -72,24 +73,8 @@ class ListPosts extends Component{
 
             sortedPosts.map((item) => (
             
-            <div key={item.id} style={{paddingTop:'1em'}}>
+                <ViewPost key={item.id} post={item}></ViewPost>
 
-              <div>
-                <Link to={{pathname:"/post/" + item.id}}>{item.title}</Link>   
-              </div>
-              <div>
-                {item.voteScore}
-              </div>
-              <div>
-                {item.timestamp}
-              </div>
-              <div>
-                <a href="#">Gostei</a>|
-                <a href="#">Não Gostei</a>
-              </div>
-
-            </div>
-            
           ))}
         
 

@@ -46,10 +46,7 @@ class PostDetail extends Component{
         <p>{post.body}</p>
         <p>{post.category}</p>        
         <b>COMMENTS</b>
-        <div>
-          <input type="text"></input>
-        </div>
-        
+        <a href="#">Add Comment</a>|        
         {
           comments.length > 0 && (
             comments.map((comment) => (

@@ -65,3 +65,17 @@ export const updatePost = (post) =>
     },
     body: JSON.stringify(post)
   }).then(res => res.json())
+
+  export function votePost (id, valueVote) {
+
+    return fetch(`${HOST}/posts/${id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            option: valueVote,
+        })
+    }).then((res) => res.json())
+}
