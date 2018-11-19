@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 //import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import * as API from '../utils/api'
-import {Container, Modal, Button, Image} from 'semantic-ui-react'
+import {Container} from 'semantic-ui-react'
 
 import Header from './Header'
 import ListPosts from './ListPosts'
-import PostDetail from './PostDetail';
-import NewPost from './NewPost';
-import EditPost from './EditPost';
+import PostDetail from './PostDetail'
+import NewPost from './NewPost'
+import EditPost from './EditPost'
+import NewComment from './NewComment'
+import EditComment from './EditComment'
 
 
 class App extends Component {
@@ -73,6 +75,18 @@ class App extends Component {
             <Route path="/editpost/:id" exact render={({ match }) => (
               <div>                
                 <EditPost id={ match.params.id }/>                
+              </div>
+            )}/>
+
+            <Route path="/newcomment/:id" exact render={({ match }) => (
+              <div>                
+                <NewComment postId={ match.params.id }/>                
+              </div>
+            )}/>
+
+            <Route path="/comment/:id" exact render={({ match }) => (
+              <div>                
+                <EditComment id={ match.params.id }/>                
               </div>
             )}/>
 

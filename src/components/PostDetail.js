@@ -1,13 +1,48 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchPostById, fetchComments } from '../utils/api'
-import { CommentMetadata } from 'semantic-ui-react';
+import { fetchPostById, fetchComments , votePost} from '../utils/api'
+import ViewComment from './ViewComment'
 
 class PostDetail extends Component{
 
   state = {
     post:{},
-    comments:[]
+    comments:[],
+    likes:0
+  }
+
+  upVote = (postId) => {
+    
+      votePost(postId,"upVote").then((result) => {
+
+        let totalLikes = this.state.likes
+        totalLikes = totalLikes + 1
+        this.setState({likes: totalLikes})
+    
+
+    }).catch(error => {
+
+      console.log(error);
+
+    })
+
+
+  }
+
+  downVote = (postId) => {
+    
+    votePost(postId,"downVote").then((result) => {
+
+      let totalLikes = this.state.likes
+      totalLikes = totalLikes - 1
+      this.setState({likes: totalLikes})
+  
+
+  }).catch(error => {
+
+    console.log(error);
+
+    })
   }
 
   componentDidMount(){
@@ -20,6 +55,7 @@ class PostDetail extends Component{
 
       fetchComments(postId).then((results) => {
         this.setState({comments: results})
+        console.log({comments: results})
       }).catch( error => {
         console.log(error)
       })
@@ -34,39 +70,42 @@ class PostDetail extends Component{
 
   render() {
     
-    const {post, comments} = this.state
+    const {post, comments, likes } = this.state
 
     console.log(comments)
 
     return (
       
       <div>
-        <h3>{post.title}</h3>
-        <div>{post.author}</div>
-        <p>{post.body}</p>
-        <p>{post.category}</p>        
+        <h3>Title:{post.title}</h3>
+        <div>Author:{post.author}</div>
+        <p>Body:{post.body}</p>
+        <p>Cat:{post.category}</p>        
+        <p>Score:{post.voteScore + likes}</p>
         <b>COMMENTS</b>
-        <a href="#">Add Comment</a>|        
+        <div>
+          <Link to={{pathname:"/newcomment/" + post.id}}>Add Comment</Link>|
+        </div>
+        
         {
           comments.length > 0 && (
             comments.map((comment) => (
-              <div>
-                <p key={comment.id}>
-                  {comment.body}
-                </p>
-                <a href="#">Edit</a>|
-                <a href="#">Del</a>|
-                <a href="#">Gostei</a>|
-                <a href="#">Não Gostei</a>
-              </div>
+              <ViewComment key={comment.id} comment={comment}/>
             ))
             
           
         )
         }
-
+        <p>Post:</p>
         <Link to={{pathname:"/editpost/" + post.id}}>Edit Post</Link>|
         <Link to={{pathname:"/remove/" + post.id}}>Remove Post</Link>
+        
+        <div>
+                <button onClick={() => this.upVote(post.id)}>Gostei</button>
+                <button onClick={() => this.downVote(post.id)}>Não Gostei</button>
+              </div>
+
+
       </div>)
     
   }

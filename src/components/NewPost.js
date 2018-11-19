@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { newPost, fetchCategories } from '../utils/api'
+import { createPost, fetchCategories } from '../utils/api'
 
 class NewPost extends Component{
   constructor(props) {
@@ -30,7 +30,7 @@ class NewPost extends Component{
 
     console.log(post)
     
-      newPost(post).then((result) => {
+      createPost(post).then((result) => {
 
       console.log(result)
 

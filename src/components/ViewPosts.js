@@ -1,10 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { votePost } from '../utils/api'
+import { votePost, deletePost } from '../utils/api'
+import * as fn from '../utils/fn'
 
 class ViewPost extends Component{
 
   state={likes:0}
+
+  delete = (postId) => {
+    
+    deletePost(postId).then((result) => {
+
+      console.log("post deleted")
+
+    }).catch(error => {
+
+      console.log(error);
+
+    })
+  }
 
   upVote = (postId) => {
     
@@ -60,13 +74,12 @@ class ViewPost extends Component{
                 {post.voteScore + this.state.likes}
               </div>
               <div>
-                {post.timestamp}
+                {fn.getDateFormat(post.timestamp)}
               </div>
               <div>
                 <button onClick={() => this.upVote(post.id)}>Gostei</button>
-              </div>
-              <div>
                 <button onClick={() => this.downVote(post.id)}>Não Gostei</button>
+                <button onClick={() => this.delete(post.id)}>Del Post</button>
               </div>
 
             </div>
