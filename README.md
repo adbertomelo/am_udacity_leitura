@@ -8,8 +8,8 @@ This repository contains my implementation of Leitura app. This is the second pr
 To download the project follow the instructions bellow
 
 ```
-git clone https://github.com/adbertomelo/myreads.git
-cd myreads
+git clone https://github.com/adbertomelo/readable.git
+cd readable
 ```
 
 Install dependencies and run with:
