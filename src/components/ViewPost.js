@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { votePost, deletePost } from '../utils/api'
 import * as fn from '../utils/fn'
+import { Container, Icon } from 'semantic-ui-react'
 
 class ViewPost extends Component{
 
@@ -61,7 +62,7 @@ class ViewPost extends Component{
     const post = this.props.post
 
     return (
-      <div>
+      <Container>
          
           {
 
@@ -77,16 +78,17 @@ class ViewPost extends Component{
                 {fn.getDateFormat(post.timestamp)}
               </div>
               <div>
-                <button onClick={() => this.upVote(post.id)}>Gostei</button>
-                <button onClick={() => this.downVote(post.id)}>Não Gostei</button>
-                <button onClick={() => this.delete(post.id)}>Del Post</button>
+                <Icon link name='thumbs up outline' onClick={() => this.upVote(post.id)}></Icon>
+                <Icon link name='thumbs down outline' onClick={() => this.downVote(post.id)}></Icon>
+                <Icon link name='delete' onClick={() => this.delete(post.id)}></Icon>
+                
               </div>
 
             </div>
             
           }
 
-      </div>
+      </Container>
     )
   }
 

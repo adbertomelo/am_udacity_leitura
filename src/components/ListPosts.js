@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadPosts, OrderBy } from '../actions'
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
-import ViewPost from './ViewPosts';
+import ViewPost from './ViewPost';
 
 class ListPosts extends Component{
 
