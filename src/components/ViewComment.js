@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { voteComment, deleteComment } from '../utils/api'
 import * as fn from '../utils/fn'
+import { Icon } from 'semantic-ui-react'
 
 class ViewComment extends Component{
 
@@ -72,16 +73,18 @@ class ViewComment extends Component{
               <div>
                 <Link to={{pathname:"/comment/" + comment.id}}>{comment.body}</Link>   
               </div>
-              <div>
-                {comment.voteScore + this.state.likes}
+              <div style={{fontSize:'9px'}}>
+                <span>Posted by {comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
               </div>
               <div>
-                {fn.getDateFormat(comment.timestamp)}
+              <span>{comment.voteScore + this.state.likes} Votes</span>
               </div>
               <div>
-                <button onClick={() => this.upVote(comment.id)}>Gostei</button>
-                <button onClick={() => this.downVote(comment.id)}>Não Gostei</button>
-                <button onClick={() => this.delete(comment.id)}>Del Comment</button>
+
+                <Icon link name='thumbs up outline' onClick={() => this.upVote(comment.id)}></Icon>
+                <Icon link name='thumbs down outline' onClick={() => this.downVote(comment.id)}></Icon>
+                <Icon link name='delete' onClick={() => this.delete(comment.id)}></Icon>
+
               </div>
 
             </div>

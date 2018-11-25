@@ -59,7 +59,7 @@ class NewComment extends Component{
             <label>Author</label>
             <input type="text" name="author" onChange={this.handleInputChange} value={comment.author}/>
           </Form.Field>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit'>Confirm</Button>
         </Form>
       </div>
     )

@@ -4,13 +4,33 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { filterPosts, orderBy } from '../actions';
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
+import Modal from 'react-modal'
+import NewPost from './NewPost';
 
 class Header extends Component {
+
+  state = {
+    newPostModalOpen: false
+  }
+
+  openNewPostModal = () => {
+    this.setState(() => ({
+      newPostModalOpen: true
+    }))
+  }
+
+  closeNewPostModal = () => {
+    this.setState(() => ({
+      newPostModalOpen: false
+    }))
+  }
 
   render()
   {
 
     return (
+
+      <div>
 
       <Menu fixed='top'>
         <Container>
@@ -48,13 +68,26 @@ class Header extends Component {
           </Menu.Item>
 
           <Menu.Item>
-                <Link to="/newpost">New Post</Link>
+                <a href="#" onClick={this.openNewPostModal}>New Post</a>
           </Menu.Item>
 
         </Container>
 
       </Menu>
   
+      <Modal
+        className='modal'
+        overlayClassName='overlay'
+        isOpen={this.state.newPostModalOpen}
+        onRequestClose={this.closeNewPostModal}
+        contentLabel='Modal'>
+        <div style={{textAlign:"right"}}>
+          <a href="#" onClick={this.closeNewPostModal}>Close</a>
+        </div>
+        <NewPost/>
+      </Modal>
+
+      </div>
       )
   
 

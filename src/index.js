@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import App from './components/App';
 import reducers from './reducers'
 import { Provider } from 'react-redux'
-
+import './index.css'
 import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
