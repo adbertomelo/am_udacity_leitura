@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { createPost, fetchCategories } from '../utils/api'
+import { Link, Redirect } from 'react-router-dom'
 
 class NewPost extends Component {
   constructor(props) {
     super(props)
-    this.state = { post: { title: '', author: '', body: '', category: 'react' }, categories: [] }
+    this.state = { post: { title: '', author: '', body: '', category: 'react' }, categories: [], redirect: false }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -13,6 +14,18 @@ class NewPost extends Component {
   getFormValidationState() {
     const {author, title, body} = this.state;
     return (author > 1 && title > 1 && body > 1);
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
   }
 
   componentDidMount() {
@@ -37,7 +50,7 @@ class NewPost extends Component {
 
     createPost(post).then((result) => {
 
-      console.log(result)
+      this.setRedirect()
 
     }).catch(error => {
 
@@ -66,6 +79,9 @@ class NewPost extends Component {
     const post = this.state.post
     return (
       <div>
+        
+        {this.renderRedirect()}
+
         <h2>New Post</h2>
 
         <Form onSubmit={this.handleSubmit}>
@@ -97,7 +113,8 @@ class NewPost extends Component {
           </Form.Field>
 
           <Form.Field>
-            <Button type='submit'>Confirmar</Button>
+            <Button type='submit'>Confirm</Button>
+            <Link to="/">Voltar</Link>
           </Form.Field>
 
 

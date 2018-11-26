@@ -6,7 +6,7 @@ import { Icon } from 'semantic-ui-react'
 
 class ViewComment extends Component{
 
-  state={likes:0}
+  state={likes:0, deleted: false}
 
   upVote = (commentId) => {
     
@@ -32,7 +32,7 @@ class ViewComment extends Component{
     
       deleteComment(commentId).then((result) => {
 
-        console.log(result)
+        this.setState({deleted: true})
   
       }).catch(error => {
   
@@ -72,7 +72,7 @@ class ViewComment extends Component{
       <div>
          
           {
-
+            !this.state.deleted && (
             <div key={comment.id} style={{paddingTop:'1em'}}>
 
               <div>
@@ -99,7 +99,7 @@ class ViewComment extends Component{
               </div>
 
             </div>
-            
+            )
           }
 
       </div>

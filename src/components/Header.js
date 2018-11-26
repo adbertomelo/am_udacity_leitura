@@ -68,24 +68,12 @@ class Header extends Component {
           </Menu.Item>
 
           <Menu.Item>
-                <a href="#" onClick={this.openNewPostModal}>New Post</a>
+                <Link to="/newpost">New Post</Link>
           </Menu.Item>
 
         </Container>
 
       </Menu>
-  
-      <Modal
-        className='modal'
-        overlayClassName='overlay'
-        isOpen={this.state.newPostModalOpen}
-        onRequestClose={this.closeNewPostModal}
-        contentLabel='Modal'>
-        <div style={{textAlign:"right"}}>
-          <a href="#" onClick={this.closeNewPostModal}>Close</a>
-        </div>
-        <NewPost/>
-      </Modal>
 
       </div>
       )
