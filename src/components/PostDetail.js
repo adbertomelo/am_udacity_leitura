@@ -96,7 +96,7 @@ class PostDetail extends Component {
 
             <Icon link name='thumbs up outline' onClick={() => this.upVote(post.id)}></Icon>
             <Icon link name='thumbs down outline' onClick={() => this.downVote(post.id)}></Icon>
-            <Icon link name='delete' onClick={() => this.delete(post.id)}></Icon>
+            {/*<Icon link name='delete' onClick={() => this.delete(post.id)}></Icon>*/}
             <Link to={{ pathname: "/editpost/" + post.id }}>
               <Icon link name='edit'></Icon>
             </Link>

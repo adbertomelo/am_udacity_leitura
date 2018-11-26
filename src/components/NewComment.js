@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { createComment  } from '../utils/api'
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class NewComment extends Component{
   
@@ -10,6 +10,19 @@ class NewComment extends Component{
     this.state = {comment:{ author:'', body:''}}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      const link = `/post/${this.props.postId}`
+      return <Redirect to={link} />
+    }
   }
 
   handleSubmit = (event) => {
@@ -22,7 +35,7 @@ class NewComment extends Component{
 
     createComment(comment).then((result) => {
 
-      console.log(result)
+      this.setRedirect()
 
     }).catch(error => {
 
@@ -51,6 +64,7 @@ class NewComment extends Component{
     const comment = this.state.comment
     return (
       <div>
+        {this.renderRedirect()}
         <h2>New Comment</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>

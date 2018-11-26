@@ -38,3 +38,13 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.comment-body{
+  font-size: 14px;
+  padding-top: 2px;
+  padding-bottom: 8px;
+}
+
+.comment-votes{
+  padding-right: 8px;
+}

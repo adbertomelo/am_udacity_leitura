@@ -27,16 +27,21 @@ class ViewComment extends Component{
   }
 
   delete = (commentId) => {
+  
+    if(window.confirm('Delete Comment?')) {
     
-    deleteComment(commentId).then((result) => {
+      deleteComment(commentId).then((result) => {
 
-      console.log("comment deleted")
+        console.log(result)
+  
+      }).catch(error => {
+  
+        console.log(error);
+  
+      })
+        
+    };
 
-  }).catch(error => {
-
-    console.log(error);
-
-  })
 
 
 }
@@ -71,20 +76,24 @@ class ViewComment extends Component{
             <div key={comment.id} style={{paddingTop:'1em'}}>
 
               <div>
-                <span>{comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
+                <span><b>{comment.author}</b> in {fn.getDateFormat(comment.timestamp)}</span>
               </div>
 
-              <div>
-                <Link to={{pathname:"/comment/" + comment.id}}>{comment.body}</Link>   
+              <div className="comment-body">
+                {comment.body}
               </div>
               
               <div>
-                <span>{comment.voteScore + this.state.likes} Votes</span>
+                  <span className="comment-votes">{comment.voteScore + this.state.likes} Votes</span>
+                  <Icon link name='thumbs up outline' onClick={() => this.upVote(comment.id)}></Icon>
+                  <Icon link name='thumbs down outline' onClick={() => this.downVote(comment.id)}></Icon>
               </div>
+
               <div>
 
-                <Icon link name='thumbs up outline' onClick={() => this.upVote(comment.id)}></Icon>
-                <Icon link name='thumbs down outline' onClick={() => this.downVote(comment.id)}></Icon>
+                <Link to={`/comment/${comment.id}`}>
+                  <Icon link name='edit'></Icon>
+                </Link>
                 <Icon link name='delete' onClick={() => this.delete(comment.id)}></Icon>
 
               </div>
