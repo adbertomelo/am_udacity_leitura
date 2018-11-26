@@ -71,13 +71,15 @@ class ViewComment extends Component{
             <div key={comment.id} style={{paddingTop:'1em'}}>
 
               <div>
+                <span>{comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
+              </div>
+
+              <div>
                 <Link to={{pathname:"/comment/" + comment.id}}>{comment.body}</Link>   
               </div>
-              <div style={{fontSize:'9px'}}>
-                <span>Posted by {comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
-              </div>
+              
               <div>
-              <span>{comment.voteScore + this.state.likes} Votes</span>
+                <span>{comment.voteScore + this.state.likes} Votes</span>
               </div>
               <div>
 

@@ -78,16 +78,15 @@ class PostDetail extends Component {
 
       <div key={post.id}>
         <div style={{paddingBottom: '2em'}}>
-          <div>
-            <h2>
-              <Link to={{ pathname: "/post/" + post.id }}>{post.title}</Link>
-            </h2>
+          <div className="post-title">
+             {post.title}
           </div>
-          <div style={{fontSize:'9px'}}>
-            <span>Posted by {post.author}</span>
-            <span style={{ paddingLeft: '0.5em' }}>{fn.getDateFormat(post.timestamp)}</span>
+          
+          <div className="post-author">
+              <span>Posted by {post.author} in {fn.getDateFormat(post.timestamp)}</span>
           </div>
-          <div style={{ fontSize: '18px' }}>
+
+          <div className="post-body">
             {post.body}
           </div>
           <div>

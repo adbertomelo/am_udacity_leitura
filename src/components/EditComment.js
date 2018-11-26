@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { fetchCommentById, updateComment } from '../utils/api'
+import { Link } from 'react-router-dom'
 
 class EditComment extends Component{
   constructor(props) {
@@ -61,11 +62,10 @@ class EditComment extends Component{
 
   render() {
     const comment = this.state.comment
-    
-    console.log(`comment no render:${comment}`)
 
     return (
       <div>
+        <h2>Edit Comment</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Body</label>
@@ -76,6 +76,7 @@ class EditComment extends Component{
             <input type="text" name="author" onChange={this.handleInputChange} value={comment.author}/>
           </Form.Field>
           <Button type='submit'>Submit</Button>
+          <Link to={`/post/${comment.parentId}`}>Voltar</Link>
         </Form>
       </div>
     )

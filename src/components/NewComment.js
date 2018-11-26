@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { createComment  } from '../utils/api'
+import { Link } from 'react-router-dom'
 
 class NewComment extends Component{
   
@@ -50,6 +51,7 @@ class NewComment extends Component{
     const comment = this.state.comment
     return (
       <div>
+        <h2>New Comment</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Comment</label>
@@ -60,6 +62,7 @@ class NewComment extends Component{
             <input type="text" name="author" onChange={this.handleInputChange} value={comment.author}/>
           </Form.Field>
           <Button type='submit'>Confirm</Button>
+          <Link to={`/post/${this.props.postId}`}>Voltar</Link>
         </Form>
       </div>
     )
