@@ -15,7 +15,7 @@ class ViewPost extends Component {
     if (!window.confirm('Delete Post?'))
       return
 
-    deletePost(postId).then((result) => {
+    deletePost(postId).then(() => {
 
       this.props.removeDeletedPost({id:postId})
 
@@ -30,6 +30,8 @@ class ViewPost extends Component {
 
     votePost(postId, "upVote").then((result) => {
 
+      //refatorar
+      //não estou acertando uma forma de fazer funcionar 
       let totalLikes = this.state.likes
       totalLikes = totalLikes + 1
       this.setState({ likes: totalLikes })
@@ -50,6 +52,8 @@ class ViewPost extends Component {
 
     votePost(postId, "downVote").then((result) => {
 
+      //refatorar
+      //não estou acertando uma forma de fazer funcionar 
       let totalLikes = this.state.likes
       totalLikes = totalLikes - 1
       this.setState({ likes: totalLikes })
@@ -68,7 +72,7 @@ class ViewPost extends Component {
 
   render() {
 
-    const post = this.props.post 
+    const {post} = this.props 
 
     return (
       <Container>
@@ -107,13 +111,6 @@ class ViewPost extends Component {
 
 }
 
-function mapStateToProps ({}) {
-
-  return {
-      
-    }
-}
-
 
 function mapDispatchToProps(dispatch){
   return{
@@ -124,4 +121,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewPost)
+export default connect(null, mapDispatchToProps)(ViewPost)

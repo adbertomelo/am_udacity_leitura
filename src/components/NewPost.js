@@ -46,8 +46,6 @@ class NewPost extends Component {
 
     const post = this.state.post
 
-    console.log(post)
-
     createPost(post).then((result) => {
 
       this.setRedirect()

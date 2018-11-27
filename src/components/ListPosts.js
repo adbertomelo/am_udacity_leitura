@@ -54,8 +54,6 @@ class ListPosts extends Component{
 
   render() {
 
-    console.log("render list posts")
-    
     const {posts, selectedCategory, order} = this.props
 
     let filteredPosts = posts
