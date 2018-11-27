@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import * as API from '../utils/api'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loadPosts, OrderBy } from '../actions'
+import { loadPosts } from '../actions'
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
 import ViewPost from './ViewPost';
 
@@ -55,6 +54,8 @@ class ListPosts extends Component{
 
   render() {
 
+    console.log("render list posts")
+    
     const {posts, selectedCategory, order} = this.props
 
     let filteredPosts = posts

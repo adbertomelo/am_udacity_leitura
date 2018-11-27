@@ -54,6 +54,8 @@ class ViewPost extends Component {
       totalLikes = totalLikes - 1
       this.setState({ likes: totalLikes })
 
+      this.props.updateDownVote({post: result})
+
 
     }).catch(error => {
 
@@ -66,13 +68,13 @@ class ViewPost extends Component {
 
   render() {
 
-    const post = this.props.post
+    const post = this.props.post 
 
     return (
       <Container>
         
         {
-
+          
           <div key={post.id} style={{ paddingTop: '1em' }}>
 
             <div>
@@ -106,14 +108,18 @@ class ViewPost extends Component {
 }
 
 function mapStateToProps ({}) {
-  return {}
+
+  return {
+      
+    }
 }
 
 
 function mapDispatchToProps(dispatch){
   return{
     removeDeletedPost: (id) => dispatch(removeDeletedPost(id)),
-    updateUpVote: (post) => dispatch(updateUpVote(post))
+    updateUpVote: (post) => dispatch(updateUpVote(post)),
+    updateDownVote: (post) => dispatch(updateDownVote(post))    
 
   }
 }
