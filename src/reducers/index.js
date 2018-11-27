@@ -27,11 +27,11 @@ function posts(state = initialState, action){
     case UP_VOTES:
       foundIndex = posts.findIndex(p => p.id === action.post.id)
       posts[foundIndex] = action.post
-      return {...state, voteScore: action.post.voteScore}
+      return {...state, posts: posts}
     case DOWN_VOTES:
       foundIndex = posts.findIndex(p => p.id === action.post.id)
       posts[foundIndex] = action.post
-      return {...state}
+      return {...state, posts: posts}
 
 
     default:
