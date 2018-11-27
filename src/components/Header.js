@@ -4,26 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { filterPosts, orderBy } from '../actions';
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
-import Modal from 'react-modal'
-import NewPost from './NewPost';
 
 class Header extends Component {
-
-  state = {
-    newPostModalOpen: false
-  }
-
-  openNewPostModal = () => {
-    this.setState(() => ({
-      newPostModalOpen: true
-    }))
-  }
-
-  closeNewPostModal = () => {
-    this.setState(() => ({
-      newPostModalOpen: false
-    }))
-  }
 
   render()
   {

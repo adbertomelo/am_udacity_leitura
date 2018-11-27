@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { votePost, deletePost } from '../utils/api'
 import * as fn from '../utils/fn'
 import { Container, Icon } from 'semantic-ui-react'
+import { removeDeletedPost, updateDownVote, updateUpVote } from '../actions'
+import { connect } from 'react-redux'
 
 class ViewPost extends Component {
 
-  state = { likes: 0, deleted: false }
+  state = { likes: 0 }
 
   delete = (postId) => {
 
@@ -15,7 +17,7 @@ class ViewPost extends Component {
 
     deletePost(postId).then((result) => {
 
-      this.setState({deleted: result.deleted})
+      this.props.removeDeletedPost({id:postId})
 
     }).catch(error => {
 
@@ -31,6 +33,8 @@ class ViewPost extends Component {
       let totalLikes = this.state.likes
       totalLikes = totalLikes + 1
       this.setState({ likes: totalLikes })
+
+      this.props.updateUpVote({post: result})
 
 
     }).catch(error => {
@@ -66,9 +70,9 @@ class ViewPost extends Component {
 
     return (
       <Container>
-
+        
         {
-          !this.state.deleted && (
+
           <div key={post.id} style={{ paddingTop: '1em' }}>
 
             <div>
@@ -91,7 +95,7 @@ class ViewPost extends Component {
 
             </div>
 
-          </div>)
+          </div>
 
         }
 
@@ -101,4 +105,17 @@ class ViewPost extends Component {
 
 }
 
-export default ViewPost
+function mapStateToProps ({}) {
+  return {}
+}
+
+
+function mapDispatchToProps(dispatch){
+  return{
+    removeDeletedPost: (id) => dispatch(removeDeletedPost(id)),
+    updateUpVote: (post) => dispatch(updateUpVote(post))
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewPost)
