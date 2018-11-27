@@ -10,7 +10,7 @@ class ViewComment extends Component{
 
   upVote = (commentId) => {
     
-      voteComment(commentId,"upVote").then((result) => {
+      voteComment(commentId,"upVote").then(() => {
 
         let totalLikes = this.state.likes
         totalLikes = totalLikes + 1
@@ -30,7 +30,7 @@ class ViewComment extends Component{
   
     if(window.confirm('Delete Comment?')) {
     
-      deleteComment(commentId).then((result) => {
+      deleteComment(commentId).then(() => {
 
         this.setState({deleted: true})
   
@@ -48,7 +48,7 @@ class ViewComment extends Component{
 
   downVote = (commentId) => {
     
-    voteComment(commentId,"downVote").then((result) => {
+    voteComment(commentId,"downVote").then(() => {
 
       let totalLikes = this.state.likes
       totalLikes = totalLikes - 1

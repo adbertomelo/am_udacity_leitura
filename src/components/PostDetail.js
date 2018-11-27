@@ -57,7 +57,6 @@ class PostDetail extends Component {
 
       fetchComments(postId).then((results) => {
         this.setState({ comments: results })
-        console.log({ comments: results })
       }).catch(error => {
         console.log(error)
       })
