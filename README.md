@@ -7,10 +7,9 @@ This repository contains my implementation of Leitura app. This is the second pr
 
 To download the project follow the instructions bellow
 
-
 git clone https://github.com/adbertomelo/am_udacity_leitura.git
 
-Install server
+#Install server
 cd am_udacity_leitura\api-server
 
 Install dependencies and run with:
@@ -18,11 +17,11 @@ Install dependencies and run with:
 npm
 ```
 npm install
-npm start
+node server.js
 ```
 
 
-Install client
+#Install client
 cd am_udacity_leitura
 
 Install dependencies and run with:
