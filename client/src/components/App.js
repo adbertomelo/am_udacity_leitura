@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
-import * as API from '../utils/api'
 import {Container} from 'semantic-ui-react'
+
+import {getAllPosts} from '../actions'
 
 import Header from './Header'
 import ListPosts from './ListPosts'
@@ -12,49 +13,34 @@ import EditPost from './EditPost'
 import NewComment from './NewComment'
 import EditComment from './EditComment'
 
-
 class App extends Component {
 
-  state = {
-    categories: []
-  }
 
   constructor(props){
     super(props)
-    this.state = { categories: []}
   }
 
   componentDidMount(){
-
-   API.fetchCategories().then((results) => {
-      
-      this.setState({categories: results.categories})
-
-    }).catch(error => {
-      console.log(error);
-    })
-
+    this.props.getAllPosts()
   }
 
   render() {
     
-    const { categories } = this.state
 
     return (
       <BrowserRouter>
-        <div>
-
-          <Header categories={categories}/>
+        <div>          
           
           <Container style={{marginTop: '7em'}}>
 
             <Route path="/"  exact render={() => (
               <div>
-                <ListPosts category=""/>
+                <ListPosts posts={this.props.posts}/>
               </div>
             )}/>
 
-            <Route path="/:category" exact render={({ match }) => (
+
+            <Route path="/:category"  exact render={({ match }) => (
               <div>                
                 <ListPosts category={ match.params.category }/>                
               </div>
@@ -99,4 +85,14 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps ({ posts }) {
+  return { posts }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    getAllPosts: () => dispatch(getAllPosts())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

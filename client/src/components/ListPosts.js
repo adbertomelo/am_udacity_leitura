@@ -38,39 +38,17 @@ class ListPosts extends Component{
 
   }
 
-  componentDidMount(){
-    
-    API.fetchPostsByCategory(this.props.category).then((results) => {
-
-      this.props.loadPosts({posts: results})
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-
-  }
 
   render() {
-
-    const {posts, selectedCategory, order} = this.props
-
-    let filteredPosts = posts
-
-    if (selectedCategory !== "all")
-    {
-      filteredPosts = posts.filter(x=>x.category===selectedCategory)
-    }
-
-    let sortedPosts = this.orderBy(filteredPosts, order)
+    
+    const {posts} = this.props
 
     return (
       <div>
          
           {
 
-            sortedPosts.map((item) => (
+            posts.map((item) => (
             
                 <ViewPost key={item.id} post={item}></ViewPost>
 
@@ -83,14 +61,4 @@ class ListPosts extends Component{
 
 }
 
-function mapStateToProps ({ posts, selectedCategory, order }) {
-  return { posts, selectedCategory, order }
-}
-
-function mapDispatchToProps(dispatch){
-  return{
-    loadPosts: (posts) => dispatch(loadPosts(posts))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListPosts)
+export default ListPosts

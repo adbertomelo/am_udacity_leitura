@@ -4,7 +4,6 @@ import { LOAD_POSTS, FILTER_POSTS, ORDER_BY, DELETE_POST, UP_VOTES, DOWN_VOTES }
 
 const initialState = {
   posts: [],
-  selectedCategory: "all",
   order: "VoteScore"
 }
 
