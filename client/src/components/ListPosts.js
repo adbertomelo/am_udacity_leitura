@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import * as API from '../utils/api'
-import { connect } from 'react-redux'
-import { loadPosts } from '../actions'
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
 import ViewPost from './ViewPost';
 
@@ -41,14 +38,15 @@ class ListPosts extends Component{
 
   render() {
     
-    const {posts} = this.props
+    const {posts, category} = this.props
+    const filteredPosts = category ? posts.filter(x => x.category === category) : posts
 
     return (
       <div>
          
           {
 
-            posts.map((item) => (
+            filteredPosts.map((item) => (
             
                 <ViewPost key={item.id} post={item}></ViewPost>
 

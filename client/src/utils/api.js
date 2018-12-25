@@ -15,6 +15,13 @@ export function fetchCategories() {
     .then((res) => res.json())
 }
 
+
+export function getAllCategories() {
+
+  return fetch(HOST + '/categories', { headers: { 'Authorization': AUTHORIZATION } })
+    .then((res) => res.json())
+}
+
 export function getAllPosts() {
 
   return fetch(HOST + '/posts', { headers: { 'Authorization': AUTHORIZATION } })

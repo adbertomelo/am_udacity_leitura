@@ -8,22 +8,13 @@ export const UP_VOTES = 'UP_VOTES'
 export const DOWN_VOTES = 'DOWN_VOTES'
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
 
-export function loadCategories({categories}){
-  
-  return{
-    type: LOAD_CATEGORIES,
-    categories
-  }
-}
-
 export function getAllPostsAction(posts){
-
+  console.log(posts)
   return{
     type: LOAD_POSTS,
     posts
   }
 }
-
 
 export function getAllPosts(){
 
@@ -32,6 +23,33 @@ export function getAllPosts(){
     api.getAllPosts().then(
       (posts) => {
         dispatch(getAllPostsAction(posts))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
+
+export function getAllCategoriesAction(categories){
+console.log(categories)
+  return{
+    type: LOAD_CATEGORIES,
+    categories
+  }
+}
+
+
+export function getAllCategories(){
+
+  return (dispatch) => {
+
+    api.getAllCategories().then(
+      (res) => {
+        dispatch(getAllCategoriesAction(res.categories))
       }
     ).catch(error => {
 

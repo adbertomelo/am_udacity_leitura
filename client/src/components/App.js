@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import {Container} from 'semantic-ui-react'
 
-import {getAllPosts} from '../actions'
+import {getAllPosts, getAllCategories} from '../actions'
 
 import Header from './Header'
 import ListPosts from './ListPosts'
@@ -21,6 +21,7 @@ class App extends Component {
   }
 
   componentDidMount(){
+    this.props.getAllCategories()
     this.props.getAllPosts()
   }
 
@@ -33,16 +34,17 @@ class App extends Component {
           
           <Container style={{marginTop: '7em'}}>
 
+            <Header categories={this.props.categories}></Header>
+
             <Route path="/"  exact render={() => (
               <div>
                 <ListPosts posts={this.props.posts}/>
               </div>
             )}/>
 
-
             <Route path="/:category"  exact render={({ match }) => (
               <div>                
-                <ListPosts category={ match.params.category }/>                
+                <ListPosts posts={this.props.posts} category={match.params.category}/>
               </div>
             )}/>
 
@@ -85,13 +87,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ posts }) {
-  return { posts }
+function mapStateToProps ({ posts, categories, selectedCategory }) {
+  return { posts, categories, selectedCategory }
 }
 
 function mapDispatchToProps(dispatch){
   return{
-    getAllPosts: () => dispatch(getAllPosts())
+    getAllPosts: () => dispatch(getAllPosts()),
+    getAllCategories: () => dispatch(getAllCategories())
   }
 }
 
