@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
+
+import { orderBy } from '../actions';
+import { connect } from 'react-redux'
 
 class Header extends Component {
 
@@ -8,8 +12,6 @@ class Header extends Component {
 
     const categories = this.props.categories
 
-    console.log(categories)
-    
     return (
 
       <div>
@@ -26,17 +28,25 @@ class Header extends Component {
                 <Link to={`/${c.name}`}>{c.name}</Link>
               </Menu.Item>
             ))
-            
+
           }
+
+          <Menu.Item>
+            <span style={{ paddingRight: '1em' }}>Order by</span>
+            <select onChange={
+              (event) => {
+                this.props.orderBy({ order: event.target.value })
+              }} >
+              <option value={VOTE_SCORE}>Vote Score</option>
+              <option value={DATE_CREATED}>Date</option>
+            </select>
+          </Menu.Item>
 
           <Menu.Item>
             <Link to="/newpost">New Post</Link>
           </Menu.Item>
 
-
         </Menu>
-
-
 
       </div>
     )
@@ -46,5 +56,10 @@ class Header extends Component {
 
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    orderBy: (order) => dispatch(orderBy(order))
+  }
+}
 
-export default Header
+export default connect(null, mapDispatchToProps)(Header)

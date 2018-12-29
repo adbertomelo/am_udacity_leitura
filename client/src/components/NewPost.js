@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { createPost, fetchCategories } from '../utils/api'
+import { createPost } from '../actions'
 import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class NewPost extends Component {
   constructor(props) {
     super(props)
-    this.state = { post: { title: '', author: '', body: '', category: 'react' }, categories: [], redirect: false }
+    this.state = { post: { title: '', author: '', body: '', category: 'react' },  redirect: false }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -28,17 +29,6 @@ class NewPost extends Component {
     }
   }
 
-  componentDidMount() {
-
-    fetchCategories().then((results) => {
-
-      this.setState({ categories: results.categories })
-
-    }).catch(error => {
-      console.log(error);
-    })
-
-  }
 
   handleSubmit = (event) => {
 
@@ -46,16 +36,7 @@ class NewPost extends Component {
 
     const post = this.state.post
 
-    createPost(post).then((result) => {
-
-      this.setRedirect()
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-
+    this.props.createPost(post)
 
   }
 
@@ -101,7 +82,7 @@ class NewPost extends Component {
           <label>Category</label>
             <select name='category' onChange={this.handleInputChange}>
               {
-                this.state.categories.map((c) => (
+                this.props.categories.map((c) => (
 
                   <option key={c.name} value={c.name}>{c.name}</option>
 
@@ -123,4 +104,16 @@ class NewPost extends Component {
 
 }
 
-export default NewPost
+function mapStateToProps ({ categories }) {
+
+  return { categories }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    createPost: (post) => dispatch(createPost(post))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost)

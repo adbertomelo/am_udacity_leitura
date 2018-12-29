@@ -1,115 +1,62 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchPostById, fetchComments, votePost } from '../utils/api'
 import ViewComment from './ViewComment'
+import Commands from './Commands'
 import { Icon } from 'semantic-ui-react'
 import * as fn from '../utils/fn'
+import { connect } from 'react-redux'
+import { getPost } from '../actions'
 
 class PostDetail extends Component {
 
-  state = {
-    post: {},
-    comments: [],
-    likes: 0
-  }
-
-  upVote = (postId) => {
-
-    votePost(postId, "upVote").then((result) => {
-
-      let totalLikes = this.state.likes
-      totalLikes = totalLikes + 1
-      this.setState({ likes: totalLikes })
-
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-
-
-  }
-
-  downVote = (postId) => {
-
-    votePost(postId, "downVote").then((result) => {
-
-      let totalLikes = this.state.likes
-      totalLikes = totalLikes - 1
-      this.setState({ likes: totalLikes })
-
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-  }
-
   componentDidMount() {
 
-    const postId = this.props.id
-
-    fetchPostById(postId).then((result) => {
-
-      this.setState({ post: result })
-
-      fetchComments(postId).then((results) => {
-        this.setState({ comments: results })
-      }).catch(error => {
-        console.log(error)
-      })
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
+    this.props.dispatch(getPost(this.props.postId))
 
   }
 
   render() {
 
-    const { post, comments, likes } = this.state
+    const { post } = this.props
 
     return (
+      post ? (
 
-      <div key={post.id}>
-        <div style={{paddingBottom: '2em'}}>
-          <div className="post-title">
-             {post.title}
-          </div>
+        <div key={post.id}>
+          <div style={{ paddingBottom: '2em' }}>
           
-          <div className="post-author">
-              <span>Posted by {post.author} in {fn.getDateFormat(post.timestamp)}</span>
-          </div>
-
-          <div className="post-body">
-            {post.body}
-          </div>
-          <div>
-            <div>
-              {post.voteScore + this.state.likes}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
+            <div className="post-title">
+              {post.title}
             </div>
 
-            <Icon link name='thumbs up outline' onClick={() => this.upVote(post.id)}></Icon>
-            <Icon link name='thumbs down outline' onClick={() => this.downVote(post.id)}></Icon>
-            {/*<Icon link name='delete' onClick={() => this.delete(post.id)}></Icon>*/}
-            <Link to={{ pathname: "/editpost/" + post.id }}>
-              <Icon link name='edit'></Icon>
-            </Link>
+            <div className="post-author">
+              <span>Posted by {post.author} in {fn.getDateFormat(post.timestamp)}</span>
+            </div>
 
+            <div className="post-body">
+              {post.body}
+            </div>
+            <div>
+              <div>
+                {post.voteScore}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
+              </div>
+
+              <Commands postId={post.id} />
+
+              <Link to={{ pathname: `/editpost/${post.id}` }}>
+                <Icon link name='edit'></Icon>
+              </Link>
+
+            </div>
           </div>
-        </div>
-
-        <div>
 
           <div>
+
+            {/* <div>
             <div>
-              <span style={{paddingRight:'0.5em'}}>COMMENTS</span>              
+              <span style={{ paddingRight: '0.5em' }}>COMMENTS</span>
               <Link to={{ pathname: "/newcomment/" + post.id }}>
-                <Icon  name='add'></Icon>
+                <Icon name='add'></Icon>
               </Link>
             </div>
 
@@ -123,18 +70,27 @@ class PostDetail extends Component {
             }
 
 
+          </div> */}
+
+
+
           </div>
-
-
 
         </div>
 
-      </div>
 
+      ) : (<div>Aguarde...</div>)
     )
 
   }
 
 }
 
-export default PostDetail
+function mapStateToProps({ post }) {
+
+  return { post }
+
+}
+
+
+export default connect(mapStateToProps)(PostDetail)

@@ -1,22 +1,103 @@
 import * as api from '../utils/api'
 
 export const LOAD_POSTS = 'LOAD_POSTS'
+export const LOAD_POST = 'LOAD_POST'
 export const FILTER_POSTS = 'FILTER_POSTS'
 export const ORDER_BY = 'ORDER_BY'
 export const DELETE_POST = 'DELETE_POST'
 export const UP_VOTES = 'UP_VOTES'
 export const DOWN_VOTES = 'DOWN_VOTES'
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const CREATE_POST = 'CREATE_POST'
+export const GET_POST = 'GET_POST'
 
-export function getAllPostsAction(posts){
-  console.log(posts)
-  return{
+export function getPostAction(post) {
+
+  return {
+    type: GET_POST,
+    post
+  }
+}
+
+export function getPost(postId) {
+
+  return (dispatch) => {
+
+    api.getPost(postId).then(
+      (res) => {
+        dispatch(getPostAction(res))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
+
+export function createPostAction(post) {
+
+  return {
+    type: CREATE_POST,
+    post
+  }
+}
+
+export function createPost(post) {
+
+  return (dispatch) => {
+
+    api.createPost(post).then(
+      (res) => {
+        dispatch(createPostAction(res))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
+
+export function deletePostAction(id) {
+
+  return {
+    type: DELETE_POST,
+    id
+  }
+}
+
+export function deletePost(id) {
+
+  return (dispatch) => {
+
+    api.deletePost(id).then(
+      () => {
+        dispatch(deletePostAction(id))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
+
+export function getAllPostsAction(posts) {
+
+  return {
     type: LOAD_POSTS,
     posts
   }
 }
 
-export function getAllPosts(){
+export function getAllPosts() {
 
   return (dispatch) => {
 
@@ -34,16 +115,16 @@ export function getAllPosts(){
 
 }
 
-export function getAllCategoriesAction(categories){
-console.log(categories)
-  return{
+export function getAllCategoriesAction(categories) {
+  console.log(categories)
+  return {
     type: LOAD_CATEGORIES,
     categories
   }
 }
 
 
-export function getAllCategories(){
+export function getAllCategories() {
 
   return (dispatch) => {
 
@@ -61,43 +142,69 @@ export function getAllCategories(){
 
 }
 
-export function filterPosts({category}){
-  
-  return{
+export function filterPosts({ category }) {
+
+  return {
     type: FILTER_POSTS,
     category
   }
 }
 
-export function orderBy({order}){
-  
-  return{
+export function orderBy({ order }) {
+
+  return {
     type: ORDER_BY,
     order
   }
 }
 
-export function removeDeletedPost({id}){
-  
-  return{
-    type: DELETE_POST,
-    id
-  }
-}
 
-export function updateUpVote({post}){
-  
-  return{
+export function addVotePostAction({ post }) {
+
+  return {
     type: UP_VOTES,
     post
   }
 }
 
-export function updateDownVote({post}){
-  
-  return{
+export function addVotePost(postId) {
+
+  return (dispatch) => {
+    
+    api.addVotePost(postId).then((result) => {
+
+      dispatch(addVotePostAction({ post: result }))
+
+    }).catch(error => {
+
+      console.log(error);
+
+    })
+    
+  }
+}
+
+export function decrVotePostAction({ post }) {
+
+  return {
     type: DOWN_VOTES,
     post
   }
 }
 
+export function decrVotePost(postId) {
+
+  return (dispatch) => {
+    api.decrVotePost(postId).then((result) => {
+
+      dispatch(decrVotePostAction({ post: result }))
+
+
+    }).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+}

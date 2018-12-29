@@ -47,6 +47,12 @@ export function fetchPostById(postId) {
     .then((res) => res.json())
 }
 
+export function getPost(postId) {
+
+  return fetch(`${HOST}/posts/${postId}`, { headers: { ...headers } })
+    .then((res) => res.json())
+}
+
 export function fetchComments(postId) {
 
   return fetch(`${HOST}/posts/${postId}/comments`, { headers: { ...headers } })
@@ -90,6 +96,35 @@ export const deletePost = (postId) =>
     }
   }).then(res => res.json())
 
+  export function addVotePost(id) {
+
+    return fetch(`${HOST}/posts/${id}`, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        option: 'upVote',
+      })
+    }).then((res) => res.json())
+    
+  }
+  export function decrVotePost(id) {
+
+    return fetch(`${HOST}/posts/${id}`, {
+      method: 'POST',
+      headers: {
+        ...headers,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        option: 'downVote',
+      })
+    }).then((res) => res.json())
+    
+  }
+    
 export function votePost(id, valueVote) {
 
   return fetch(`${HOST}/posts/${id}`, {
@@ -102,6 +137,7 @@ export function votePost(id, valueVote) {
       option: valueVote,
     })
   }).then((res) => res.json())
+  
 }
 
 export function voteComment(id, valueVote) {
