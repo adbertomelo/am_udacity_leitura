@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import {Container} from 'semantic-ui-react'
 
 import {getAllPosts, getAllCategories} from '../actions'
@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <BrowserRouter>
         <div>          
@@ -32,19 +32,24 @@ class App extends Component {
 
             <Header categories={this.props.categories}></Header>
 
-            <Switch>
+              {/* tentei usar <Switch>  mas não direcionava para rota /newpost*/}
+
               <Route path="/"  exact render={() => (
                   <ListPosts/>
-              )}/>
+              )}/>              
+              
               <Route path="/:category"  exact render={({ match }) => (
                   <ListPosts category={match.params.category}/>
               )}/>
+
               <Route path="/:category/:post_id" exact render={({ match }) => (
-                  <PostDetail postId={ match.params.post_id }/>                
+                <PostDetail postId={ match.params.post_id }/>                
               )}/>
-              <Route path="/newpost" exact render={({ match }) => (
-                  <NewPost/>                
+
+              <Route path="/newpost"  exact render={() => (
+                  <NewPost/>
               )}/>
+
               <Route path="/editpost/:id" exact render={({ match }) => (
                   <EditPost id={ match.params.id }/>                
               )}/>
@@ -54,7 +59,7 @@ class App extends Component {
               <Route path="/comment/:id" exact render={({ match }) => (
                   <EditComment id={ match.params.id }/>                
               )}/>
-            </Switch>
+
 
           </Container>          
 

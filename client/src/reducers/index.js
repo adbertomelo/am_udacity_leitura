@@ -26,7 +26,7 @@ function posts(state = initialState, action){
     case CREATE_POST:
       const post = action.post
       posts.push(post)
-      return {...state, posts }
+      return {...state, posts, post }
     case DELETE_POST:
       let activePosts= posts.filter(p => p.id !== action.id)
       return {...state, posts: activePosts}

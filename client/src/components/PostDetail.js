@@ -24,7 +24,7 @@ class PostDetail extends Component {
 
         <div key={post.id}>
           <div style={{ paddingBottom: '2em' }}>
-          
+
             <div className="post-title">
               {post.title}
             </div>
@@ -88,6 +88,8 @@ class PostDetail extends Component {
 
 function mapStateToProps({ post }) {
 
+  console.log(post)
+  
   return { post }
 
 }

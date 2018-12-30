@@ -19,7 +19,7 @@ class Header extends Component {
         <Menu fixed='top'>
 
           <Menu.Item header>
-            <a href="/">Projeto Leitura</a>
+            <Link to='/'>Projeto Leitura</Link>
           </Menu.Item>
 
           {
