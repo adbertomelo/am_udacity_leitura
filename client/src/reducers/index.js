@@ -1,6 +1,8 @@
 
 import { GET_POST, LOAD_POSTS, FILTER_POSTS, ORDER_BY, 
-  DELETE_POST, UP_VOTES, DOWN_VOTES, LOAD_CATEGORIES, CREATE_POST } from '../actions'
+  DELETE_POST, UP_VOTES, DOWN_VOTES, CREATE_POST } from '../actions/PostActions'
+
+import { LOAD_CATEGORIES } from '../actions/CategoriesActions'
 
 
 const initialState = {
@@ -16,7 +18,7 @@ function posts(state = initialState, action){
   switch(action.type)
   {
     case LOAD_POSTS:
-      return { ...state, posts: action.posts }
+      return { ...state, posts: action.posts, order:'x' }
     case LOAD_CATEGORIES:
       return { ...state, categories: action.categories }
     case FILTER_POSTS:

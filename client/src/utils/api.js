@@ -53,7 +53,7 @@ export function getPost(postId) {
     .then((res) => res.json())
 }
 
-export function fetchComments(postId) {
+export function getAllComments(postId) {
 
   return fetch(`${HOST}/posts/${postId}/comments`, { headers: { ...headers } })
     .then((res) => res.json())

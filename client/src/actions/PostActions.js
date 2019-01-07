@@ -7,9 +7,35 @@ export const ORDER_BY = 'ORDER_BY'
 export const DELETE_POST = 'DELETE_POST'
 export const UP_VOTES = 'UP_VOTES'
 export const DOWN_VOTES = 'DOWN_VOTES'
-export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
 export const CREATE_POST = 'CREATE_POST'
 export const GET_POST = 'GET_POST'
+export const GET_COMMENTS = 'GET_COMMENTS'
+
+export function getAllCommentsAction(comments) {
+
+  return {
+    type: GET_COMMENTS,
+    comments
+  }
+}
+
+export function getAllComments(postId) {
+
+  return (dispatch) => {
+
+    api.getAllComments(postId).then(
+      (res) => {
+        dispatch(getAllCommentsAction(res))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
 
 export function getPostAction(post) {
 
@@ -115,32 +141,6 @@ export function getAllPosts() {
 
 }
 
-export function getAllCategoriesAction(categories) {
-  console.log(categories)
-  return {
-    type: LOAD_CATEGORIES,
-    categories
-  }
-}
-
-
-export function getAllCategories() {
-
-  return (dispatch) => {
-
-    api.getAllCategories().then(
-      (res) => {
-        dispatch(getAllCategoriesAction(res.categories))
-      }
-    ).catch(error => {
-
-      console.log(error);
-
-    })
-
-  }
-
-}
 
 export function filterPosts({ category }) {
 

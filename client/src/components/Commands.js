@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deletePost, addVotePost, decrVotePost } from '../actions'
+import { deletePost, addVotePost, decrVotePost } from '../actions/PostActions'
 import { Icon } from 'semantic-ui-react'
 
 class Commands extends Component{

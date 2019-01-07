@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { VOTE_SCORE, DATE_CREATED } from '../utils/constants'
 
-import { orderBy } from '../actions';
+import { orderBy } from '../actions/PostActions';
 import { connect } from 'react-redux'
 
 class Header extends Component {

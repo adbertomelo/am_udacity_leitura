@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import App from './components/App';
-import reducers from './reducers'
+import reducers from './reducers/combineReducers'
 import { Provider } from 'react-redux'
 import './index.css'
 import * as serviceWorker from './serviceWorker';
@@ -12,7 +12,12 @@ import 'semantic-ui-css/semantic.min.css';
 
 //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
-const store = createStore(reducers, applyMiddleware(thunk))
+const initialState = {
+  posts:{data:[], order:'VoteScore'},
+  categories: {data:[]}
+}
+
+const store = createStore(reducers, initialState,  applyMiddleware(thunk))
 
 ReactDOM.render(    
   

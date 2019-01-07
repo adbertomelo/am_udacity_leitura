@@ -5,19 +5,23 @@ import Commands from './Commands'
 import { Icon } from 'semantic-ui-react'
 import * as fn from '../utils/fn'
 import { connect } from 'react-redux'
-import { getPost } from '../actions'
+import { getPost, getAllComments } from '../actions/PostActions'
 
 class PostDetail extends Component {
 
   componentDidMount() {
+    
+    const postId = this.props.postId
 
-    this.props.dispatch(getPost(this.props.postId))
+    this.props.dispatch(getPost(postId))
+    
+    this.props.dispatch(getAllComments(postId))
 
   }
 
   render() {
 
-    const { post } = this.props
+    const { post, comments } = this.props
 
     return (
       post ? (
@@ -43,7 +47,7 @@ class PostDetail extends Component {
 
               <Commands postId={post.id} />
 
-              <Link to={{ pathname: `/editpost/${post.id}` }}>
+              <Link to={{ pathname: `/post/edit/${post.id}` }}>
                 <Icon link name='edit'></Icon>
               </Link>
 
@@ -52,7 +56,9 @@ class PostDetail extends Component {
 
           <div>
 
-            {/* <div>
+          {
+          
+          <div>
             <div>
               <span style={{ paddingRight: '0.5em' }}>COMMENTS</span>
               <Link to={{ pathname: "/newcomment/" + post.id }}>
@@ -62,15 +68,16 @@ class PostDetail extends Component {
 
 
             {
-              comments.length > 0 && (
+              comments? (
                 comments.map((comment) => (
                   <ViewComment key={comment.id} comment={comment} />
                 ))
-              )
+              ): <div>No Comments</div>
             }
 
 
-          </div> */}
+          </div>
+        }
 
 
 
@@ -86,11 +93,11 @@ class PostDetail extends Component {
 
 }
 
-function mapStateToProps({ post }) {
-
-  console.log(post)
+function mapStateToProps({ posts }) {
   
-  return { post }
+  const {post, comments} = posts
+
+  return { post, comments }
 
 }
 

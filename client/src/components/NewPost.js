@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { createPost } from '../actions'
+import { createPost } from '../actions/PostActions'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -99,7 +99,7 @@ function mapStateToProps ({ categories, post }) {
 
   const redirect = post?true:false
 
-  return { categories, redirect }
+  return { categories: categories.data, redirect }
 }
 
 function mapDispatchToProps(dispatch){
