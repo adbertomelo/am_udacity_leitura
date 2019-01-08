@@ -10,6 +10,7 @@ export const DOWN_VOTES = 'DOWN_VOTES'
 export const CREATE_POST = 'CREATE_POST'
 export const GET_POST = 'GET_POST'
 export const GET_COMMENTS = 'GET_COMMENTS'
+export const UPDATE_POST = 'UPDATE_POST'
 
 export function getAllCommentsAction(comments) {
 
@@ -78,6 +79,32 @@ export function createPost(post) {
     api.createPost(post).then(
       (res) => {
         dispatch(createPostAction(res))
+      }
+    ).catch(error => {
+
+      console.log(error);
+
+    })
+
+  }
+
+}
+
+export function updatePostAction(post) {
+
+  return {
+    type: UPDATE_POST,
+    post
+  }
+}
+
+export function updatePost(post) {
+
+  return (dispatch) => {
+
+    api.updatePost(post).then(
+      (res) => {
+        dispatch(updatePostAction(res))
       }
     ).catch(error => {
 

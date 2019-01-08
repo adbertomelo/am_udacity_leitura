@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getPost } from '../actions/PostActions'
+import { getPost, updatePost } from '../actions/PostActions'
 
 
 class EditPost extends Component{
@@ -19,6 +19,21 @@ class EditPost extends Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+
+    const postId = this.props.postId
+    //this.setState({editPost: this.props.initialPost})
+    this.props.dispatch(getPost(postId))
+   
+ }  
+
+ componentWillReceiveProps(nextProps) {
+  if (nextProps.post) {
+    this.setState({
+      editPost: nextProps.post
+    })
+  }
+} 
   // setRedirect = () => {
   //   this.setState({
   //     redirect: true
@@ -33,9 +48,13 @@ class EditPost extends Component{
   // }
 
   handleSubmit = (event) => {
+    
     event.preventDefault()
+
     const post = this.state.editPost
-    console.log(post)
+    
+    this.props.dispatch(updatePost(post))
+    
     // updatePost(post).then((result) => {
 
     //   this.setRedirect()
@@ -61,37 +80,24 @@ class EditPost extends Component{
 
     this.setState({editPost: editPost})
 
-    const {post} = this.props
-
+ 
   }
 
-  componentDidMount(){
-
-     const postId = this.props.postId
-     this.setState({editPost: this.props.initialPost})
-     this.props.dispatch(getPost(postId))
-    
-  }  
 
   render() {
     
-    console.log("render editpost")
-
-    const {post} = this.props
     const {editPost} = this.state
 
-    const title = editPost.title
-
     return (      
-      post?(
+
       <div>        
         <h2>Edit Post</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>Title</label>
-            <input type="text" name="title" onChange={this.handleInputChange} value={title}/>
+            <input type="text" name="title" onChange={this.handleInputChange} value={editPost.title}/>
           </Form.Field>
-          {/* <Form.Field>
+          <Form.Field>
             <label>Author</label>
             <input type="text" name="author" onChange={this.handleInputChange} value={editPost.author}/>
           </Form.Field>
@@ -100,9 +106,10 @@ class EditPost extends Component{
             <input type="text" name="body" onChange={this.handleInputChange} value={editPost.body}/>      
           </Form.Field>    
           <Button type='submit'>Confirm</Button>
-          <Link to={`/post/${editPost.id}`}>Voltar</Link> */}
+          <Link to={`/post/${editPost.id}`}>Voltar</Link> 
         </Form>        
-      </div>):(<div>Aguarde...</div>)
+      </div>
+
     )
   }
 

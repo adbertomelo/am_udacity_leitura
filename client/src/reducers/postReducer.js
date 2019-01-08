@@ -1,6 +1,6 @@
 
 import { GET_POST, LOAD_POSTS, FILTER_POSTS, ORDER_BY, 
-  DELETE_POST, UP_VOTES, DOWN_VOTES, CREATE_POST, GET_COMMENTS } from '../actions/PostActions'
+  DELETE_POST, UP_VOTES, DOWN_VOTES, CREATE_POST, GET_COMMENTS, UPDATE_POST } from '../actions/PostActions'
 
 
 function posts(state = {}, action){
@@ -25,6 +25,7 @@ function posts(state = {}, action){
       return {...state, data: activePosts}
     case UP_VOTES:
     case DOWN_VOTES:
+    case UPDATE_POST:
       const index = data.findIndex(p => p.id === action.post.id)
       const newPosts = Object.assign([], data, {[index]: action.post});
       return {...state, data: newPosts, post: action.post}
