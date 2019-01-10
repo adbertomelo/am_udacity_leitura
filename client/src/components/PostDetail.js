@@ -6,6 +6,7 @@ import { Icon } from 'semantic-ui-react'
 import * as fn from '../utils/fn'
 import { connect } from 'react-redux'
 import { getPost, getAllComments } from '../actions/PostActions'
+import NewComment from '../components/NewComment'
 
 class PostDetail extends Component {
 
@@ -75,6 +76,7 @@ class PostDetail extends Component {
               ): <div>No Comments</div>
             }
 
+            <NewComment postId={post.id}/>
 
           </div>
         }

@@ -1,28 +1,15 @@
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { createComment  } from '../utils/api'
-import { Redirect, Link } from 'react-router-dom'
+import { createComment  } from '../actions/CommentsActions'
 
 class NewComment extends Component{
   
   constructor(props) {
     super(props)
-    this.state = {comment:{ author:'', body:''}}
+    this.state = {comment:{ author:'autor teste', body:'blá blá blá'}}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      const link = `/post/${this.props.postId}`
-      return <Redirect to={link} />
-    }
   }
 
   handleSubmit = (event) => {
@@ -33,16 +20,7 @@ class NewComment extends Component{
 
     comment.parentId = this.props.postId
 
-    createComment(comment).then((result) => {
-
-      this.setRedirect()
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-  
+    this.props.createComment(comment)
 
   }
 
@@ -64,19 +42,14 @@ class NewComment extends Component{
     const comment = this.state.comment
     return (
       <div>
-        {this.renderRedirect()}
-        <h2>New Comment</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>Comment</label>
-            <input type="text" name="body" onChange={this.handleInputChange} value={comment.body}/>
+            <input type="text" name="author" onChange={this.handleInputChange} value={comment.author} placeholder="Author" />
           </Form.Field>
           <Form.Field>
-            <label>Author</label>
-            <input type="text" name="author" onChange={this.handleInputChange} value={comment.author}/>
+            <input type="text" name="body" onChange={this.handleInputChange} value={comment.body} placeholder="Comment"/>
           </Form.Field>
           <Button type='submit'>Confirm</Button>
-          <Link to={`/post/${this.props.postId}`}>Voltar</Link>
         </Form>
       </div>
     )
@@ -84,4 +57,10 @@ class NewComment extends Component{
 
 }
 
-export default NewComment
+function mapDispatchToProps(dispatch){
+  return{
+    createComment: (comment) => dispatch(createComment(comment))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NewComment)

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPost, updatePost } from '../actions/PostActions'
 
-
 class EditPost extends Component{
   constructor(props) {
     super(props)
@@ -107,7 +106,7 @@ class EditPost extends Component{
           </Form.Field>    
           <Button type='submit'>Confirm</Button>
           <Link to={`/post/${editPost.id}`}>Voltar</Link> 
-        </Form>        
+        </Form>    
       </div>
 
     )
