@@ -49,7 +49,7 @@ class NewComment extends Component{
           <Form.Field>
             <input type="text" name="body" onChange={this.handleInputChange} value={comment.body} placeholder="Comment"/>
           </Form.Field>
-          <Button type='submit'>Confirm</Button>
+          <Button type='submit'>Add Comment</Button>
         </Form>
       </div>
     )

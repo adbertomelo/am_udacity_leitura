@@ -5,87 +5,100 @@ import Commands from './Commands'
 import { Icon } from 'semantic-ui-react'
 import * as fn from '../utils/fn'
 import { connect } from 'react-redux'
-import { getPost, getAllComments } from '../actions/PostActions'
+import { getPost } from '../actions/PostActions'
 import NewComment from '../components/NewComment'
+import CommentCommands from './CommentCommands';
+import ErrorNotFound from './ErrorNotFound';
+
 
 class PostDetail extends Component {
 
+
   componentDidMount() {
-    
+
     const postId = this.props.postId
 
     this.props.dispatch(getPost(postId))
-    
-    this.props.dispatch(getAllComments(postId))
+
+    //this.props.dispatch(getComments(postId))
 
   }
 
+
+
   render() {
 
-    const { post, comments } = this.props
+    const { post } = this.props
+    
+    const postDeleted = (Object.keys(post.data).length === 0 && post.data.constructor === Object)
 
     return (
+
       post ? (
 
-        <div key={post.id}>
+        postDeleted ? (<ErrorNotFound/>): (
+
+          <div key={post.data.id}>
+
           <div style={{ paddingBottom: '2em' }}>
 
             <div className="post-title">
-              {post.title}
+              {post.data.title}
             </div>
 
             <div className="post-author">
-              <span>Posted by {post.author} in {fn.getDateFormat(post.timestamp)}</span>
+              <span>Posted by {post.data.author} in {fn.getDateFormat(post.data.timestamp)}</span>
             </div>
 
             <div className="post-body">
-              {post.body}
+              {post.data.body}
             </div>
+
             <div>
               <div>
-                {post.voteScore}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
+                {post.data.voteScore}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
               </div>
 
-              <Commands postId={post.id} />
+              <Commands postId={post.data.id} />
 
-              <Link to={{ pathname: `/post/edit/${post.id}` }}>
+              <Link to={{ pathname: `/post/edit/${post.data.id}` }}>
                 <Icon link name='edit'></Icon>
               </Link>
 
+
             </div>
           </div>
 
           <div>
-
-          {
-          
-          <div>
-            <div>
-              <span style={{ paddingRight: '0.5em' }}>COMMENTS</span>
-              <Link to={{ pathname: "/newcomment/" + post.id }}>
-                <Icon name='add'></Icon>
-              </Link>
-            </div>
-
 
             {
-              comments? (
-                comments.map((comment) => (
-                  <ViewComment key={comment.id} comment={comment} />
-                ))
-              ): <div>No Comments</div>
+
+              <div>
+                <div>
+                  <span style={{ paddingRight: '0.5em' }}>COMMENTS</span>
+                </div>
+
+                {
+
+                  post.comments.map((comment) => (
+                    <div key={comment.id}>
+                      <ViewComment comment={comment} />
+                      <CommentCommands commentId={comment.id} />
+                    </div>
+                  ))
+
+                }
+
+                <NewComment postId={post.data.id} />
+
+              </div>
             }
 
-            <NewComment postId={post.id}/>
-
-          </div>
-        }
-
-
-
           </div>
 
-        </div>
+        </div>          
+
+        )
 
 
       ) : (<div>Aguarde...</div>)
@@ -96,10 +109,10 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps({ posts }) {
-  
-  const {post, comments} = posts
 
-  return { post, comments }
+  const { post } = posts
+
+  return { post }
 
 }
 

@@ -1,13 +1,10 @@
-import { CREATE_COMMENT } from '../actions/PostActions'
-
+import { DELETE_COMMENT } from '../actions/CommentsActions'
 
 function comments(state = {}, action){
 
-  console.log(state.comments)
-  
   switch(action.type)
   {
-    case CREATE_COMMENT:
+    case DELETE_COMMENT:
       return {...state}
     default:
       return state

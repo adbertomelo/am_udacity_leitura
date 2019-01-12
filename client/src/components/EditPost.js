@@ -118,7 +118,7 @@ function mapStateToProps({ posts }) {
   
    const {post} = posts
    
-   return { post }
+   return { post: post.data }
 
  }
 

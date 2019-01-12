@@ -12,7 +12,7 @@ export const GET_POST = 'GET_POST'
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const UPDATE_POST = 'UPDATE_POST'
 
-export function getAllCommentsAction(comments) {
+export function getCommentsAction(comments) {
 
   return {
     type: GET_COMMENTS,
@@ -20,13 +20,13 @@ export function getAllCommentsAction(comments) {
   }
 }
 
-export function getAllComments(postId) {
+export function getComments(postId) {
 
   return (dispatch) => {
 
-    api.getAllComments(postId).then(
+    api.getComments(postId).then(
       (res) => {
-        dispatch(getAllCommentsAction(res))
+        dispatch(getCommentsAction(res))
       }
     ).catch(error => {
 
@@ -51,8 +51,19 @@ export function getPost(postId) {
   return (dispatch) => {
 
     api.getPost(postId).then(
-      (res) => {
-        dispatch(getPostAction(res))
+      (post) => {
+
+        api.getComments(postId).then(
+          
+          (comments) => {
+            const res = {data: post, comments: comments}
+            dispatch(getPostAction(res))
+          }         
+
+        ).catch(error => {
+
+        })
+
       }
     ).catch(error => {
 

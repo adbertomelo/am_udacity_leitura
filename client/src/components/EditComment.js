@@ -1,45 +1,29 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
-import { fetchCommentById, updateComment } from '../utils/api'
-import { Link, Redirect } from 'react-router-dom'
+import { updateComment } from '../actions/CommentsActions'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class EditComment extends Component{
   constructor(props) {
     super(props)
-    this.state = {comment:{ author:'', body:''}, redirect:false}
+    this.state = {editComment:{ author:'', body:''}}
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+
+    const comment = this.state.editComment
     
-    const comment = this.state.comment
-
-    updateComment(comment).then((result) => {
-
-      this.setRedirect()
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-
+    this.props.dispatch(updateComment(comment))
 
   }
 
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      const link = `/post/${this.state.comment.parentId}`
-      return <Redirect to={link} />
-    }
+  componentDidMount()
+  {
+    this.setState({editComment: this.props.comment})
   }
 
   handleInputChange(event) {
@@ -48,48 +32,32 @@ class EditComment extends Component{
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    const comment = this.state.comment
+    const editComment = this.state.editComment
 
-    comment[name] = value
+    editComment[name] = value
 
-    this.setState({comment: comment});
+    this.setState({comment: editComment});
 
   }
 
-  componentDidMount(){
-    
-    const commentId = this.props.id
-
-    fetchCommentById(commentId).then((result) => {
-
-      this.setState({comment:result})
-
-    }).catch(error => {
-
-      console.log(error);
-
-    })
-
-  }  
-
   render() {
-    const comment = this.state.comment
+
+    const {editComment} = this.state
 
     return (
       <div>
-        {this.renderRedirect()}
+        
         <h2>Edit Comment</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>Body</label>
-            <input type="text" name="body" onChange={this.handleInputChange} value={comment.body}/>
+            <label>Author</label>
+            <input type="text" name="author" onChange={this.handleInputChange} value={editComment.author}/>
           </Form.Field>
           <Form.Field>
-            <label>Author</label>
-            <input type="text" name="author" onChange={this.handleInputChange} value={comment.author}/>
+            <label>Body</label>
+            <input type="text" name="body" onChange={this.handleInputChange} value={editComment.body}/>
           </Form.Field>
           <Button type='submit'>Confirm</Button>
-          <Link to={`/post/${comment.parentId}`}>Voltar</Link>
         </Form>
       </div>
     )
@@ -97,4 +65,12 @@ class EditComment extends Component{
 
 }
 
-export default EditComment
+function mapStateToProps() {
+  
+  return { }
+
+}
+
+
+export default connect(mapStateToProps)(EditComment)
+

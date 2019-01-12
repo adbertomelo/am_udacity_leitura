@@ -13,7 +13,7 @@ import 'semantic-ui-css/semantic.min.css';
 //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 const initialState = {
-  posts:{data:[], order:'VoteScore'},
+  posts:{data:[], order:'VoteScore', post: {data:{}, comments: []}},
   categories: {data:[]}
 }
 

@@ -53,7 +53,7 @@ export function getPost(postId) {
     .then((res) => res.json())
 }
 
-export function getAllComments(postId) {
+export function getComments(postId) {
 
   return fetch(`${HOST}/posts/${postId}/comments`, { headers: { ...headers } })
     .then((res) => res.json())
@@ -96,35 +96,35 @@ export const deletePost = (postId) =>
     }
   }).then(res => res.json())
 
-  export function addVotePost(id) {
+export function addVotePost(id) {
 
-    return fetch(`${HOST}/posts/${id}`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        option: 'upVote',
-      })
-    }).then((res) => res.json())
-    
-  }
-  export function decrVotePost(id) {
+  return fetch(`${HOST}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      option: 'upVote',
+    })
+  }).then((res) => res.json())
 
-    return fetch(`${HOST}/posts/${id}`, {
-      method: 'POST',
-      headers: {
-        ...headers,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        option: 'downVote',
-      })
-    }).then((res) => res.json())
-    
-  }
-    
+}
+export function decrVotePost(id) {
+
+  return fetch(`${HOST}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      option: 'downVote',
+    })
+  }).then((res) => res.json())
+
+}
+
 export function votePost(id, valueVote) {
 
   return fetch(`${HOST}/posts/${id}`, {
@@ -137,10 +137,10 @@ export function votePost(id, valueVote) {
       option: valueVote,
     })
   }).then((res) => res.json())
-  
+
 }
 
-export function voteComment(id, valueVote) {
+export function addVoteComment(id) {
 
   return fetch(`${HOST}/comments/${id}`, {
     method: 'POST',
@@ -149,7 +149,21 @@ export function voteComment(id, valueVote) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      option: valueVote,
+      option: 'upVote',
+    })
+  }).then((res) => res.json())
+}
+
+export function decrVoteComment(id) {
+
+  return fetch(`${HOST}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      option: 'downVote',
     })
   }).then((res) => res.json())
 }
@@ -173,7 +187,7 @@ export function createComment(comment) {
 
 }
 
-export function fetchCommentById(commentId) {
+export function getComment(commentId) {
 
   return fetch(`${HOST}/comments/${commentId}`, { headers: { ...headers } })
     .then((res) => res.json())
