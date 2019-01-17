@@ -6,6 +6,5 @@ import comments from './commentsReducer'
 
 export default combineReducers ({
   posts,
-  categories,
-  comments
+  categories
 })

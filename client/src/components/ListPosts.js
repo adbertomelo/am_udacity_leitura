@@ -62,7 +62,7 @@ class ListPosts extends Component {
                     </h2>
                   </div>
                   <div>
-                    <span>Posted by {post.author}</span>
+                    <span>Posted by <b>{post.author}</b></span>
                     <span style={{ paddingLeft: '0.5em' }}>{fn.getDateFormat(post.timestamp)}</span>
                   </div>
                   <div>

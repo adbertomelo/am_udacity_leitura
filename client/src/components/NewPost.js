@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { createPost } from '../actions/PostActions'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class NewPost extends Component {
@@ -26,6 +26,8 @@ class NewPost extends Component {
 
     this.props.createPost(post)
 
+    this.setState({redirect:true})
+
   }
 
   handleInputChange(event) {
@@ -44,8 +46,8 @@ class NewPost extends Component {
 
   render() {
 
-    //if (this.props.redirect)
-    //  return <Redirect to="/"></Redirect>
+    if (this.state.redirect)
+      return <Redirect to="/"></Redirect>
 
     const post = this.state.post
 

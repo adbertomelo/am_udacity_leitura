@@ -30,7 +30,7 @@ class PostDetail extends Component {
 
     const { post } = this.props
     
-    const postDeleted = (Object.keys(post.data).length === 0 && post.data.constructor === Object)
+    const postDeleted = (Object.keys(post.data).length === 0 && post.data.constructor === Object) || post.deleted
 
     return (
 
@@ -59,7 +59,7 @@ class PostDetail extends Component {
                 {post.data.voteScore}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
               </div>
 
-              <Commands postId={post.data.id} />
+              <Commands postId={post.data.id} redirectTo={"/"} />
 
               <Link to={{ pathname: `/post/edit/${post.data.id}` }}>
                 <Icon link name='edit'></Icon>
@@ -111,6 +111,8 @@ class PostDetail extends Component {
 function mapStateToProps({ posts }) {
 
   const { post } = posts
+
+  console.log(post)
 
   return { post }
 
