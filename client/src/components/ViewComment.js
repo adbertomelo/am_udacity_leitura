@@ -30,13 +30,13 @@ class ViewComment extends Component {
 
         {
           
-            <div key={comment.id} style={{ paddingTop: '1em' }}>
+            <div key={comment.id}>
 
               <div>
-                <span><b>{comment.author}</b> in {fn.getDateFormat(comment.timestamp)}</span>
+                <span>{comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
               </div>
 
-              <div className="comment-body">
+              <div>
                 {comment.body}
               </div>
 

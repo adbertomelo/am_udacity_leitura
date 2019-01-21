@@ -42,15 +42,15 @@ class PostDetail extends Component {
 
           <div style={{ paddingBottom: '2em' }}>
 
-            <div className="post-title">
+            <div>
               {post.data.title}
             </div>
 
-            <div className="post-author">
+            <div>
               <span>Posted by {post.data.author} in {fn.getDateFormat(post.data.timestamp)}</span>
             </div>
 
-            <div className="post-body">
+            <div>
               {post.data.body}
             </div>
 

@@ -53,12 +53,6 @@ class App extends Component {
               <EditPost postId={match.params.post_id} initialPost={this.props.post} />
             )} />
 
-            <Route path="/newcomment/:id" exact render={({ match }) => (
-              <NewComment postId={match.params.id} />
-            )} />
-            <Route path="/comment/:id" exact render={({ match }) => (
-              <EditComment id={match.params.id} />
-            )} />
 
           </Container>
         </div>
