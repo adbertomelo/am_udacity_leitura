@@ -31,7 +31,7 @@ class CommentCommands extends Component{
     const { commentId } = this.props
 
     return (
-      <div>
+      <div style={{float:"left"}}>
       
           <Icon link name='delete' onClick={() => this.delete(commentId)}></Icon>
           <Icon link name='thumbs up outline' onClick={() => this.upVote(commentId)}></Icon>

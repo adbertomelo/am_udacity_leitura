@@ -19,6 +19,8 @@ class EditComment extends Component{
     
     this.props.dispatch(updateComment(comment))
 
+    this.props.closeCommentModal()
+
   }
 
   componentDidMount()

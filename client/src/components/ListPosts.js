@@ -67,10 +67,13 @@ class ListPosts extends Component {
                   </div>
                   <div>
                     <div>
-                      <span style={{ paddingRight: '0.2em' }}>{post.voteScore}</span><span>Votes</span><span style={{ paddingRight: '0.2em', paddingLeft:'0.5em' }}>{post.commentCount}</span><span>Comments</span>
+                      <span style={{ paddingRight: '0.2em' }}>{post.voteScore}</span><span>Votes</span><span style={{ paddingRight: '0.2em', paddingLeft: '0.5em' }}>{post.commentCount}</span><span>Comments</span>
                     </div>
 
+
                     <Commands postId={post.id} />
+
+
 
                   </div>
 

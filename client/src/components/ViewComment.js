@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import * as fn from '../utils/fn'
 import Modal from 'react-modal'
 import EditComment from '../components/EditComment'
+import CommentCommands from './CommentCommands';
+import { Icon } from 'semantic-ui-react'
 
 class ViewComment extends Component {
 
@@ -44,7 +46,9 @@ class ViewComment extends Component {
                 <span className="comment-votes">{comment.voteScore} Votes</span>
               </div>
 
-              <button onClick={() => this.openCommentModal()}>Edit</button>
+              <CommentCommands commentId={comment.id} />
+
+              <Icon link link name='edit' onClick={() => this.openCommentModal()}></Icon>
 
             </div>
           
@@ -57,7 +61,7 @@ class ViewComment extends Component {
             onRequestClose={this.closeCommentModal}
             contentLabel='Modal'>
 
-            <EditComment comment={comment}></EditComment>
+            <EditComment comment={comment} closeCommentModal={this.closeCommentModal}></EditComment>
             
           </Modal>
 

@@ -7,14 +7,9 @@ import { connect } from 'react-redux'
 class NewPost extends Component {
   constructor(props) {
     super(props)
-    this.state = { post: { title: 'teste', author: 'teste', body: 'teste', category: 'react' },  redirect: false }
+    this.state = { post: { title: '', author: '', body: '', category: 'react' },  redirect: false }
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  getFormValidationState() {
-    const {author, title, body} = this.state;
-    return (author > 1 && title > 1 && body > 1);
   }
 
   

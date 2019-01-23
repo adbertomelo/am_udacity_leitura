@@ -7,7 +7,6 @@ import * as fn from '../utils/fn'
 import { connect } from 'react-redux'
 import { getPost } from '../actions/PostActions'
 import NewComment from '../components/NewComment'
-import CommentCommands from './CommentCommands';
 import ErrorNotFound from './ErrorNotFound';
 
 
@@ -61,11 +60,6 @@ class PostDetail extends Component {
 
               <Commands postId={post.data.id} redirectTo={"/"} />
 
-              <Link to={{ pathname: `/post/edit/${post.data.id}` }}>
-                <Icon link name='edit'></Icon>
-              </Link>
-
-
             </div>
           </div>
 
@@ -75,18 +69,15 @@ class PostDetail extends Component {
 
               <div>
                 <div>
-                  <span style={{ paddingRight: '0.5em' }}>COMMENTS</span>
+                  <span>Comments</span>
                 </div>
 
                 {
-
                   post.comments.map((comment) => (
                     <div key={comment.id}>
                       <ViewComment comment={comment} />
-                      <CommentCommands commentId={comment.id} />
                     </div>
                   ))
-
                 }
 
                 <NewComment postId={post.data.id} />
