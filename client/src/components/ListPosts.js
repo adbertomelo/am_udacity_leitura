@@ -71,7 +71,7 @@ class ListPosts extends Component {
                     </div>
 
 
-                    <Commands postId={post.id} />
+                    <Commands postId={post.id} editButton={false}/>
 
 
 

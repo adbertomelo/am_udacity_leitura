@@ -30,13 +30,26 @@
 
 .post-author{
   font-size: 12px;
-  padding-left: 5px;
 }
 
 .post-body{
   font-size: 16px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.post-box{
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-bottom-color: grey;
+  padding-bottom: 15px;
+}
+
+.comment-box{
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-bottom-color: grey;
+  padding-bottom: 15px;
 }
 
 .comment-body{

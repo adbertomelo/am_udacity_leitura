@@ -32,10 +32,10 @@ class ViewComment extends Component {
 
         {
           
-            <div key={comment.id}>
+            <div key={comment.id} className="comment-box">
 
               <div>
-                <span>{comment.author} in {fn.getDateFormat(comment.timestamp)}</span>
+                <span><b>{comment.author}</b> in {fn.getDateFormat(comment.timestamp)}</span>
               </div>
 
               <div>

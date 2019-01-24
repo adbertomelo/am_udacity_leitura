@@ -37,9 +37,13 @@ class Commands extends Component{
           <Icon link name='thumbs up outline' onClick={() => this.upVote(postId)}></Icon>
           <Icon link name='thumbs down outline' onClick={() => this.downVote(postId)}></Icon>
           <Icon link name='delete' onClick={() => this.delete(postId)}></Icon>
-          <Link to={{ pathname: `/post/edit/${postId}` }}>
+          {
+            this.props.editButton?(
+              <Link to={{ pathname: `/post/edit/${postId}` }}>
                 <Icon link name='edit'></Icon>
-          </Link>
+              </Link>
+            ):""
+          }
 
       </div>
     )
