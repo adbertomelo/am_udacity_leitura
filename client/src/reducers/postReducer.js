@@ -29,28 +29,24 @@ function posts(state = {}, action){
       const newPosts = Object.assign([], data, {[index]: action.post});
       return {...state, data: newPosts, post: {...post, data: action.post}}
     case GET_POST:
-      //console.log({act:action})
       return {...state, post: action.post}
     case GET_COMMENTS:
       return {...state, comments: action.comments}
     case CREATE_COMMENT:
-      //refatorar essa garrancheira...
-      //const index2 = data.findIndex(p => p.id === post.data.id)
-      //const pp = data[index2]
-      //pp.commentCount+=1
-      //const posts2 = Object.assign([], data, {[index2]: pp});
+      
       const newListPostsAfterAddComment = getPostsWithCommentCountUpdated(data, post.data, 1)
-      const postComments = {...post, comments:[...post.comments, action.comment]}      
+      const postDataAfterAddComment = getPostWithCommentCountUpdated(post.data, post.data.id, 1)
+      const postComments = {...post, data: postDataAfterAddComment, comments:[...post.comments, action.comment]}      
       return {...state, data: newListPostsAfterAddComment, post: postComments}
+
     case DELETE_COMMENT:
+      
       const activesComments = post.comments.filter(p => p.id !== action.commentId)
-      const postActivesComments = {...post, comments:activesComments}      
-      //const newListPostsAfterDelComment = getPostsWithCommentCountUpdated(data, post.data, -1)
+      const postDataAfterDelComment = getPostWithCommentCountUpdated(post.data, post.data.id, -1)
+      const postActivesComments = {...post, data: postDataAfterDelComment, comments:activesComments}      
       const newListPostsAfterDelComment = data.map((item) => {
         return getPostWithCommentCountUpdated(item, post.data.id, -1)
       })
-
-      //console.log({d: data, p: newListPostsAfterDelComment})
 
       return {...state, data: newListPostsAfterDelComment, post: postActivesComments}
 

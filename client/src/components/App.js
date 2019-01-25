@@ -12,8 +12,6 @@ import ListPosts from './ListPosts'
 import PostDetail from './PostDetail'
 import NewPost from './NewPost'
 import EditPost from './EditPost'
-import NewComment from './NewComment'
-import EditComment from './EditComment'
 
 
 class App extends Component {

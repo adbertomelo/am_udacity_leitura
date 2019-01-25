@@ -48,7 +48,7 @@ class ViewComment extends Component {
 
               <CommentCommands commentId={comment.id} />
 
-              <Icon link link name='edit' onClick={() => this.openCommentModal()}></Icon>
+              <Icon link name='edit' onClick={() => this.openCommentModal()}></Icon>
 
             </div>
           

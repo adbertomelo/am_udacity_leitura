@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import { updateComment } from '../actions/CommentsActions'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class EditComment extends Component{

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import ViewComment from './ViewComment'
 import Commands from './Commands'
-import { Icon } from 'semantic-ui-react'
 import * as fn from '../utils/fn'
 import { connect } from 'react-redux'
 import { getPost } from '../actions/PostActions'
@@ -55,7 +53,10 @@ class PostDetail extends Component {
 
               <div>
                 <div>
-                  {post.data.voteScore}<span style={{ paddingLeft: '0.5em' }}>Votes</span>
+                  
+
+
+                  <span style={{ paddingRight: '0.2em' }}>{post.data.voteScore}</span><span>Votes</span><span style={{ paddingRight: '0.2em', paddingLeft: '0.5em' }}>{post.data.commentCount}</span><span>Comments</span>                  
                 </div>
 
                 <Commands postId={post.data.id} redirectTo={"/"} editButton={true} />
@@ -104,8 +105,6 @@ class PostDetail extends Component {
 function mapStateToProps({ posts }) {
 
   const { post } = posts
-
-  console.log(post)
 
   return { post }
 
