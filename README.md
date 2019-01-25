@@ -17,9 +17,12 @@ Install dependencies and run with:
 npm
 ```
 npm install
-node server.js
 ```
 
+run server
+```
+node server.js
+```
 
 #Install client
 cd am_udacity_leitura
@@ -29,5 +32,9 @@ Install dependencies and run with:
 npm
 ```
 npm install
+```
+
+run
+```
 npm start
 ```
