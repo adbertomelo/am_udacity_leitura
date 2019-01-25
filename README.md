@@ -10,7 +10,17 @@ To download the project follow the instructions bellow
 git clone https://github.com/adbertomelo/am_udacity_leitura.git
 
 #Install server
-cd am_udacity_leitura\api-server
+cd am_udacity_leitura\server
+
+Install dependencies and run with:
+ 
+npm
+```
+npm install
+```
+
+#Install client
+cd am_udacity_leitura\client
 
 Install dependencies and run with:
  
@@ -24,17 +34,7 @@ run server
 node server.js
 ```
 
-#Install client
-cd am_udacity_leitura
-
-Install dependencies and run with:
- 
-npm
-```
-npm install
-```
-
-run
+run client
 ```
 npm start
 ```
